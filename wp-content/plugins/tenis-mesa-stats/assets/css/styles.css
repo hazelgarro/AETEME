@@ -1,0 +1,45 @@
+.stats {
+    padding: 20px;
+    margin-top: 3rem;
+}
+
+.tenis-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.tenis-stats .stat {
+    width: 22%;
+    margin: 10px 0;
+}
+
+.stat svg {
+  fill: #002050;
+  width: 68px;
+  height: 68px;
+}
+
+.has-text-align-center strong {
+  color: #C20004; 
+}
+
+@media(max-width: 600px) {
+    .tenis-stats {
+        flex-direction: column;
+    }
+
+    .tenis-stats .stat {
+        width: 100%;
+    }
+}
+
+/* Dark Mode */
+html[data-darkmode="dark"] .has-text-align-center strong {
+  color: #FDB700; 
+}
+
+html[data-darkmode="dark"] .stat svg {
+  fill: #FDB700;
+}

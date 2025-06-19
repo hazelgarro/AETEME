@@ -1,0 +1,166 @@
+.contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    background-color: #002050;
+    border-radius: 20px; 
+    min-height: 410px;
+    /* flex-direction: column; PARA USAR COMO WIDGET*/
+    flex-direction: column;
+}
+
+.lado-izquierdo {
+    padding: 40px;
+    flex: 1;
+    background-color: white;
+    border-radius: 18px 0px 0px 18px;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lado-derecho {
+    padding: 40px;
+    flex: 1;
+    text-align: left;
+}
+
+#resultado {
+    font-size: 18px;
+    min-height: 50px;  
+}
+
+.texto-blanco {
+    color: white !important;
+}
+
+input[type="number"] {
+    width: 100%; 
+    padding: 10px 10px 10px 20px; 
+    border: 2px solid #002050; 
+    border-radius: 20px; 
+    background-color: transparent; 
+    color: #002050; 
+    font-size: 18px; 
+    margin-top: 1rem;
+}
+
+input[type="number"]::placeholder {
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+
+input[type="number"]:focus {
+    outline: none; 
+    border-color: #1e73ff; 
+}
+
+#calcular {
+    background-color: #002050; 
+    color: white; 
+    padding: 10px 20px; 
+    border: 2px solid #002050; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    font-size: 16px;
+}
+
+#calcular:hover {
+    background-color: #1e73ff; 
+    color: white; 
+    border: 2px solid #1e73ff;
+}
+
+#limpiar {
+    background-color: transparent; 
+    color: #002050; 
+    padding: 10px 20px; 
+    border: 2px solid #002050; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    font-size: 16px;
+}
+
+#limpiar:hover {
+    border: 2px solid #1e73ff;
+    color: #1e73ff;
+}
+
+.margin-top-2 {
+    margin-top: 2rem; 
+}
+
+.margin-left-1 {
+    margin-left: 1rem; 
+}
+
+.flex-center {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}	
+
+.titulo-seccion {
+    font-weight: bold;
+}
+
+.bloque-resultado {
+    margin-bottom: 20px;
+}
+
+.etiqueta {
+    font-size: 16px;
+    margin: 0;
+    color: white;
+}
+
+.valor {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+    color: white;
+}
+
+.divisor {
+    border: none;
+    border-top: 1px solid white;
+    margin: 20px auto;
+    width: 50%;   
+}
+
+.texto-centrado {
+    text-align: center !important;
+}
+
+.texto-azul {
+    color: #002050;
+}	
+
+.mensaje-error {
+  color: red;
+  font-size: 15px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .contenedor {
+    flex-direction: column;
+    border-radius: 20px;  
+  }
+
+  .lado-izquierdo {
+    border-radius: 20px 20px 0 0;  
+    height: auto;  
+  }
+
+  .lado-derecho {
+    border-radius: 0 0 20px 20px;
+    height: auto;
+  }
+
+  .flex-center {
+    flex-direction: column;
+  }
+}
