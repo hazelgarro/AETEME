@@ -11,7 +11,7 @@ get_header(); ?>
     <section class="contenedor-carrusel">
         <h3><?php the_title(); ?></h3>
 
-        <div class="swiper">
+        <div class="swiper swiper-custom">
             <div class="swiper-wrapper">
 
                 <?php
@@ -22,7 +22,7 @@ get_header(); ?>
                         preg_match_all('/<img[^>]+src="([^">]+)"/i', $content, $matches);
                         if (!empty($matches[1])) {
                             foreach ($matches[1] as $src) {
-                                echo '<div class="swiper-slide"><img src="'.esc_url($src).'" alt="" /></div>';
+                                echo '<div class="swiper-slide swiper-slide-custom"><img src="'.esc_url($src).'" alt="" /></div>';
                             }
                         }
                     endwhile;
@@ -33,7 +33,7 @@ get_header(); ?>
                 foreach ($attached_images as $img) {
                     $url = wp_get_attachment_url($img->ID);
                     if (!in_array($url, $matches[1] ?? [])) {
-                        echo '<div class="swiper-slide"><img src="'.esc_url($url).'" alt="" /></div>';
+                        echo '<div class="swiper-slide swiper-slide-custom"><img src="'.esc_url($url).'" alt="" /></div>';
                     }
                 }
                 ?>

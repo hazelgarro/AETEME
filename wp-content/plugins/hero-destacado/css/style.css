@@ -1,0 +1,148 @@
+.hero-grid {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 1rem;
+  margin-top: 2rem;
+  color: white;
+  text-decoration: none !important;
+  outline: none !important;
+  margin: 0 !important;
+
+
+
+}
+* {
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+.elementor-131 .elementor-element.elementor-element-4c603a7 {
+    display: block !important;
+    margin: 0;
+}
+   
+.hero-grid-2{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.hero-left .hero-img {
+  background-size: cover;
+  background-position: center;
+  padding: 3rem;
+  height: 100%;
+  min-height: 420px;
+  width: 100%;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;  
+  flex-direction: column;
+  justify-content: flex-end;
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-left h2 {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-decoration: none !important;
+  text-align: center;
+ 
+}
+
+.hero-category {
+  background: #C4DBFF;
+  width: 10rem;
+  color: #1E73FF;
+  padding: 0.3rem 0.8rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+.hero-grid img:hover {
+  transform: scale(1.05);
+}
+
+.bloghash-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+.hero-category:hover {
+  background: #1E73FF;
+  color: white;
+}
+
+.hero-meta span {
+  font-size: 0.85rem;
+  margin-right: 1rem;
+  color: #ddd;
+}
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.mini-post {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.mini-post img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.mini-info h4 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.mini-category {
+  font-size: 1.3rem;
+  color: #4e7eff;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+
+.mini-date {
+  font-size: 1rem;
+  color: #666;
+}
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-main,
+  .hero-side {
+    width: 100%;
+  }
+
+  .hero-side .mini-post {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .hero-side .mini-post img {
+    width: 100%;
+    height: auto;
+  }
+}
