@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 function bloghash_hijo_enqueue_styles() {
     $parent_style = 'parent-style';
 
@@ -28,3 +33,13 @@ function ocultar_widgets_en_pagina_34( $sidebars_widgets ) {
     return $sidebars_widgets;
 }
 add_filter( 'sidebars_widgets', 'ocultar_widgets_en_pagina_34' );
+
+
+function includes() {
+    require get_stylesheet_directory() . '/inc/template-parts.php';
+    require get_template_directory() . '/inc/customizer/dynamic-styles.php';
+    require get_template_directory() . '/inc/customizer/default.php';
+    require get_template_directory() . '/inc/customizer/customizer.php';
+    require get_template_directory() . '/inc/common.php';
+    require get_template_directory() . '/inc/template-parts.php';
+}

@@ -10,6 +10,11 @@
     --color-negro-30:rgba(0, 0, 0, 0.3);
 }
 
+
+.bloghash-btn {
+    background-color: var(--color-rojo) !important;
+}
+
 /*Header*/
 a.btn-small.bloghash-btn {
   background-color: var(--color-azul-primario) !important;
@@ -176,6 +181,7 @@ html[data-darkmode="dark"] .page-header{
 html[data-darkmode="dark"] .bloghash-header-widgets .bloghash-header-widget .bloghash-darkmode span{
   color: var(--color-celeste-claro)  !important;  
 }
+
 /* Fin Dark Mode */
 
 /* Pagina Sobre Nosotros*/
@@ -216,6 +222,22 @@ article#post-34 figure {
     border-radius: 8px;
 }
 
+/* Estilos de mapa de las tres marias */
+.footer-map-container {
+	width: 100%;
+	text-align: center;
+}
+
+.footer-map-iframe {
+	width: 100%;
+	max-width: 100%;
+	height: 450px;
+	border: 0;
+	display: block;
+	margin: 0 auto;
+}
+
+
 /* Pagina Noticias*/
 
 html[data-darkmode="dark"] .elementor-131 .elementor-element.elementor-element-10c9808 .wpr-grid-item-title .inner-block a{
@@ -237,3 +259,4 @@ html[data-darkmode="dark"] .elementor-131 .elementor-element.elementor-element-1
 html[data-darkmode="dark"] .elementor-131 .elementor-element.elementor-element-d20ad93 .elementor-heading-title{
   color: var(--color-blanco) !important;
 }
+ 

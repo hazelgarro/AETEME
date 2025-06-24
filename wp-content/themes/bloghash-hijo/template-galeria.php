@@ -2,6 +2,11 @@
 /**
  * Template Name: Galería Personalizada
  */
+
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 get_header(); ?>
 
 <!-- Swiper CSS -->

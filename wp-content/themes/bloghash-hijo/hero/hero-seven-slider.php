@@ -7,6 +7,9 @@
  * @since       1.0.0
  */
 
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 // Setup Hero posts.
 $bloghash_hero_slider_orderby = bloghash_option( 'hero_slider_orderby' );

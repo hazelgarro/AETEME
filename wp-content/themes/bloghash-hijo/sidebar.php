@@ -7,6 +7,10 @@
  * @since       1.0.0
  */
 
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! bloghash_is_sidebar_displayed() ) {
 	return;
 }
