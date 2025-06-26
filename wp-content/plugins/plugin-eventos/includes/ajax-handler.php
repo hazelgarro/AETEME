@@ -1,21 +1,34 @@
 <?php
 
+//Registrar acciones AJAX
 add_action('wp_ajax_ct_cargar_torneos', 'ct_render_torneos_ajax');
 add_action('wp_ajax_nopriv_ct_cargar_torneos', 'ct_render_torneos_ajax');
 
+/**
+ * Controlador AJAX que imprime el HTML de los torneos para el mes y año dados.
+ * Se utiliza en la navegación entre trimestres.
+ */
 function ct_render_torneos_ajax()
 {
     $mes_actual = isset($_POST['mes']) ? intval($_POST['mes']) : date('n');
     $anio_actual = isset($_POST['anio']) ? intval($_POST['anio']) : date('Y');
 
     echo ct_get_torneos_html($mes_actual, $anio_actual);
-    wp_die();
+    wp_die(); // Finaliza correctamente la ejecución AJAX
 }
 
+/**
+ * Genera el HTML de los torneos agrupados por mes, mostrando 3 meses consecutivos.
+ * 
+ * @param int $mes_actual Mes inicial
+ * @param int $anio_actual Año inicial
+ * @return string HTML renderizado
+ */
 function ct_get_torneos_html($mes_actual, $anio_actual)
 {
     ob_start();
 
+    //Consulta de torneos desde el mes actual en adelante
     $eventos = new WP_Query([
         'post_type' => 'torneo',
         'posts_per_page' => -1,
@@ -34,6 +47,7 @@ function ct_get_torneos_html($mes_actual, $anio_actual)
 
     $eventos_por_mes = [];
 
+    //Se agrupan eventos por mes/año
     if ($eventos->have_posts()) {
         while ($eventos->have_posts()) {
             $eventos->the_post();
@@ -56,7 +70,7 @@ function ct_get_torneos_html($mes_actual, $anio_actual)
         wp_reset_postdata();
     }
 
-    // Mostrar los próximos 3 meses
+    //Mostrar bloques de 3 meses
     for ($i = 0; $i < 3; $i++) {
         $mes_i = $mes_actual + $i;
         $anio_i = $anio_actual;
@@ -98,7 +112,7 @@ function ct_get_torneos_html($mes_actual, $anio_actual)
         }
     }
 
-    // Verificar si hay eventos en trimestres anterior y siguiente
+    //Navegación entre trimestres
     $hay_anterior = ct_tiene_eventos_en_rango($mes_actual, $anio_actual, 'anterior');
     $hay_siguiente = ct_tiene_eventos_en_rango($mes_actual, $anio_actual, 'siguiente');
 
@@ -125,6 +139,14 @@ function ct_get_torneos_html($mes_actual, $anio_actual)
     return ob_get_clean();
 }
 
+/**
+ * Verifica si existen eventos en el trimestre anterior o siguiente.
+ *
+ * @param int $mes Mes actual
+ * @param int $anio Año actual
+ * @param string $direccion 'anterior' o 'siguiente'
+ * @return bool
+ */
 function ct_tiene_eventos_en_rango($mes, $anio, $direccion = 'siguiente')
 {
     if ($mes < 1) {
@@ -135,11 +157,11 @@ function ct_tiene_eventos_en_rango($mes, $anio, $direccion = 'siguiente')
         $anio += 1;
     }
 
-    // Si estamos yendo hacia el pasado, buscamos eventos ANTES de la fecha inicial
+    // Si estamos yendo hacia el atrás, se buscan eventos antes de la fecha inicial
     if ($direccion === 'anterior') {
         $fecha_limite = date("Y-m-d", mktime(0, 0, 0, $mes, 1, $anio));
         $compare = '<';
-    } else { // Hacia el futuro
+    } else { // Hacia adelante
         $fecha_limite = date("Y-m-t", mktime(0, 0, 0, $mes + 2, 1, $anio)); // fin del trimestre
         $compare = '>';
     }

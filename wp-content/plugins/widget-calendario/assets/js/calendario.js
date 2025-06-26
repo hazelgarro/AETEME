@@ -1,4 +1,23 @@
+/**
+ * calendario.js
+ * ---------------------------------------------------------------------------
+ * Gestiona la interacción del widget Calendario:
+ *   • Tooltip accesible en escritorio.
+ *   • Modal de eventos en dispositivos móviles.
+ *   • Alterna entre vistas calendario/lista (controlado en PHP).
+ *
+ * Flujo general:
+ * 1. Obtiene o crea nodos auxiliares (tooltip, modal).
+ * 2. Helper functions: showTooltip / hideTooltip.
+ * 3. Detecta si el viewport es mobile o desktop.
+ * 4. Desktop → tooltip sobre chips.
+ * 5. Mobile → modal con eventos del día.
+ *
+ * Dependencia: pwc_eventos (inyectada vía wp_localize_script en PHP).
+ *---------------------------------------------------------------------------*/
 document.addEventListener("DOMContentLoaded", function () {
+
+    //Tooltip único: si no existe en el DOM, se crea dinámicamente.
     const tooltip = document.getElementById("evento-tooltip") || (() => {
         const t = document.createElement("div");
         t.id = "evento-tooltip";
@@ -7,12 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
         return t;
     })();
 
+    //Modal (solo se usa en móviles)
     const modal = document.getElementById("modal-eventos");
     const contenidoModal = document.getElementById("modal-contenido-evento");
     const cerrarModalBtn = modal.querySelector(".cerrar-modal");
+
+    // Datos de eventos agrupados por día
     const eventos = window.pwc_eventos?.datos || {};
 
-    // Funciones tooltip (desktop)
+
+    //Muestra el tooltip con la información del evento.
     function showTooltip(el) {
         const nombre = el.getAttribute("data-nombre");
         const fechaInicio = el.getAttribute("data-fecha-inicio");
@@ -27,15 +50,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         tooltip.style.display = "block";
 
+        //Posiciona tooltip evitando desbordes
         const rect = el.getBoundingClientRect();
         const tooltipRect = tooltip.getBoundingClientRect();
 
-        let top = rect.bottom + window.scrollY + 8;
+        let top = rect.bottom + window.scrollY + 8; // 8 px de margen inferior
         let left = rect.left + window.scrollX;
 
+        //Ajuste horizontal (no salir de viewport)
         if (left + tooltipRect.width > window.innerWidth) {
             left = window.innerWidth - tooltipRect.width - 10;
         }
+
+        //Ajuste vertical (si no cabe abajo,se muestra arriba)
         if (top + tooltipRect.height > window.innerHeight + window.scrollY) {
             top = rect.top + window.scrollY - tooltipRect.height - 8;
         }
@@ -44,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip.style.left = left + "px";
     }
 
+    //Oculta el tooltip.
     function hideTooltip() {
         tooltip.style.display = "none";
     }
@@ -56,15 +84,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".evento-chip").forEach(el => {
             el.addEventListener("mouseenter", () => showTooltip(el));
             el.addEventListener("mouseleave", hideTooltip);
-            el.addEventListener("focus", () => showTooltip(el));
+            el.addEventListener("focus", () => showTooltip(el)); // accesibilidad
             el.addEventListener("blur", hideTooltip);
         });
     } else {
-        // Mobile: abrir modal al tocar día con eventos
+        // Mobile: abrir modal al tocar día con eventos.
         document.querySelectorAll(".dia-calendario").forEach(diaEl => {
             diaEl.addEventListener("click", () => {
                 const dia = diaEl.getAttribute("data-dia");
                 if (eventos[dia]) {
+                    //Construye el HTML de la lista de eventos
                     let html = `<h3 id="modal-title" style="margin-bottom:1rem">Eventos del día ${dia}</h3>`;
                     eventos[dia].forEach(evento => {
                         html += `
@@ -88,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.style.display = "none";
         });
 
-        // Cerrar al hacer click fuera del contenido
+        // Cerrar modal al hacer click fuera del contenido
         modal.addEventListener("click", e => {
             if (e.target === modal) {
                 modal.style.display = "none";
