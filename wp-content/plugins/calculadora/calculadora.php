@@ -9,10 +9,12 @@ Author URI: https://dev-benjaminprueba01.pantheonsite.io/
 Text Domain: Calculadora
 */
 
+// Evita el acceso directo al archivo a través de la URL, y si no está definida la constante ABSPATH se termina la ejecución del script.
 if (!defined('ABSPATH')) {
     exit; 
 }
 
+// Define la estructura HTML y registra el shortcode [calculadora] que mostrará la calculadora de puntos
 function calculadora_shortcode() {
     ob_start();
     ?>
@@ -58,14 +60,15 @@ function calculadora_shortcode() {
     <?php
     return ob_get_clean();
 }
-
 add_shortcode('calculadora', 'calculadora_shortcode');
 
+// Encola los scripts y estilos necesarios para la calculadora.
 function calculadora_enqueue_scripts() {
     wp_enqueue_script('calculadora-script', plugin_dir_url(__FILE__) . 'assets/js/calculadora.js', array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'calculadora_enqueue_scripts');
 
+// Encola los estilos CSS necesarios para la calculadora.
 function calculadora_enqueue_styles() {
     wp_enqueue_style('calculadora-style', plugin_dir_url(__FILE__) . 'assets/css/calculadora.css');
 }

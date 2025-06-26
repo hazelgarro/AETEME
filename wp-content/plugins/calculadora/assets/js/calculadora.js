@@ -1,3 +1,5 @@
+//funcion para calcular puntos del ganador y perdedor basado en las reglas de la FECOTEME, de acuerdo a la diferencia de puntos entre ambos jugadores.
+//Se ejecuta al hacer clic en el botón "Calcular" y muestra los puntos obtenidos por el ganador y el perdedor en función de la diferencia de puntos ingresada.
 function calcularPuntos() {
     let ganador = parseInt(document.getElementById('puntos_ganador').value);
     let perdedor = parseInt(document.getElementById('puntos_perdedor').value);
@@ -22,6 +24,7 @@ function calcularPuntos() {
     document.getElementById('puntos_perdedor_resultado').innerText = puntos_perdedor ? `${puntos_perdedor} puntos` : '';
 }
 
+// Función para limpiar los campos de entrada y los resultados mostrados en la calculadora.
 function limpiarCampos() {
     document.getElementById('puntos_ganador').value = '';
     document.getElementById('puntos_perdedor').value = '';
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("limpiar").addEventListener("click", limpiarCampos);
 });
 
+// Espera a que el DOM esté completamente cargado antes de agregar los eventos a los elementos del formulario, para asegurar que los elementos del formulario estén disponibles para ser manipulados.
 document.addEventListener('DOMContentLoaded', function () {
     const botonCalcular = document.getElementById('calcular');
     const inputGanador = document.getElementById('puntos_ganador');

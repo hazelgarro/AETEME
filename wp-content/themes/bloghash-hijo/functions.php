@@ -1,9 +1,11 @@
 <?php
 
+// Evita el acceso directo al archivo a través de la URL, y si no está definida la constante ABSPATH se termina la ejecución del script.
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit; 
 }
 
+// Esta funcion se encarga de incluir los archivos de hojas de estilo necesarios del tema hijo
 function bloghash_hijo_enqueue_styles() {
     $parent_style = 'parent-style';
 
@@ -19,6 +21,7 @@ function bloghash_hijo_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'bloghash_hijo_enqueue_styles');
 
+// Esta funcion se encarga de eliminar el sidebar en la página con ID 34
 function bloghash_remover_sidebar_en_pagina_34() {
     if ( is_page(34) ) {
         remove_all_actions( 'bloghash_sidebar' );
@@ -26,6 +29,7 @@ function bloghash_remover_sidebar_en_pagina_34() {
 }
 add_action( 'template_redirect', 'bloghash_remover_sidebar_en_pagina_34' );
 
+// Esta funcion se encarga de ocultar los widgets del sidebar en la página con ID 34
 function ocultar_widgets_en_pagina_34( $sidebars_widgets ) {
     if ( is_page(34) ) {
         $sidebars_widgets['sidebar-1'] = array(); // Vacía el sidebar

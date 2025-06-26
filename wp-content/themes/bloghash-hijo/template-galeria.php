@@ -3,13 +3,15 @@
  * Template Name: Galería Personalizada
  */
 
- if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+// Evita el acceso directo al archivo a través de la URL, y si no está definida la constante ABSPATH se termina la ejecución del script.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;  
 }
 
+//Para mostrar el header en la plantilla personalizada
 get_header(); ?>
 
-<!-- Swiper CSS -->
+<!-- Swiper CSS, carga una hoja de estilos externa para la biblioteca Swiper -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 <main>
@@ -20,7 +22,7 @@ get_header(); ?>
             <div class="swiper-wrapper">
 
                 <?php
-                // 1. Imágenes dentro del contenido
+                // Incluye y muestra imágenes dentro del contenido
                 if (have_posts()) :
                     while (have_posts()) : the_post();
                         $content = apply_filters('the_content', get_the_content());
@@ -33,7 +35,7 @@ get_header(); ?>
                     endwhile;
                 endif;
 
-                // 2. Imágenes adjuntas a la página (no insertadas)
+                // Incluye y muestra imágenes adjuntas a la página (no insertadas)
                 $attached_images = get_attached_media('image', get_the_ID());
                 foreach ($attached_images as $img) {
                     $url = wp_get_attachment_url($img->ID);
@@ -52,9 +54,11 @@ get_header(); ?>
     </section>
 </main>
 
-<!-- Swiper JS -->
+<!-- Carga el archivo JavaScript de la biblioteca Swiper desde el CDN de jsDelivr. Este archivo permite crear sliders/carouseles interactivos en la página. -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script>
+    // Inicializa una instancia de Swiper para el contenedor con la clase 'swiper'.
+    // Se habilita el bucle infinito, la paginación clickeable y los botones de navegación.
     const swiper = new Swiper('.swiper', {
         loop: true,
         pagination: {
@@ -68,4 +72,5 @@ get_header(); ?>
     });
 </script>
 
+<!-- Para mostrar el footer en la plantilla personalizada -->
 <?php get_footer(); ?>
